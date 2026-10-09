@@ -1,9 +1,13 @@
-﻿namespace Client;
+﻿using Core.Models;
+
+namespace Client;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello, World!");
+        Console.WriteLine("Välkommen till WestCoast Education!");
+
+        CourseManager.AddCourse();
     }
 }
