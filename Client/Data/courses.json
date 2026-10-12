@@ -1,0 +1,11 @@
+[
+  {
+    "id": "bae508c6-eab0-4db2-a9cf-4f5e7fcb0d23",
+    "courseNumber": "2",
+    "title": "KL",
+    "courseType": 1,
+    "days": 30,
+    "startDate": "2000-10-10T00:00:00",
+    "endDate": "2000-11-11T00:00:00"
+  }
+]

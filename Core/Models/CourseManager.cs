@@ -5,7 +5,10 @@ namespace Core.Models;
 
 public static class CourseManager
 {
-    public static Course AddCourse()
+    private static string _path = Path.Combine(Environment.CurrentDirectory, "Data", "courses.json");
+    private static List<Course> _allCourses = Storage<Course>.Read(_path);
+
+    public static void AddCourse()
     {
         var course = new Course();
 
@@ -16,6 +19,19 @@ public static class CourseManager
         course.StartDate = ConsoleInputManager.GetDateFromConsole("Skriv startdatum");
         course.EndDate = ConsoleInputManager.GetDateFromConsole("Skriv slutdatum");
 
-        return course;
+        _allCourses.Add(course);
+        Storage<Course>.Write(_path, _allCourses);
+    }
+
+    public static void ListCourses()
+    {
+        if (_allCourses.Count == 0)
+        {
+            Console.WriteLine("No courses found.");
+        }
+        else
+        {
+            ConsoleOutputManager.WriteList("Kurser", _allCourses.Select(o => o.ToString()).ToList()!);
+        }
     }
 }

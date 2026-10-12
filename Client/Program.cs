@@ -8,6 +8,9 @@ class Program
     {
         Console.WriteLine("Välkommen till WestCoast Education!");
 
+        ConsoleOutputManager.WriteBreak(true);
+
         CourseManager.AddCourse();
+        CourseManager.ListCourses();
     }
 }
