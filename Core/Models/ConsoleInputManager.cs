@@ -4,6 +4,12 @@ namespace Core.Models;
 
 public static class ConsoleInputManager
 {
+    public static void WaitForAnyKeyToReturnToMenu()
+    {
+        Console.WriteLine("Tryck på valfri knapp för att gå tillbaka till menyn");
+        Console.ReadKey(true);
+    }
+
     public static string GetStringFromConsole(string label)
     {
         while (true)

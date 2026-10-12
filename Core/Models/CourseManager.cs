@@ -10,28 +10,48 @@ public static class CourseManager
 
     public static void AddCourse()
     {
-        var course = new Course();
+        Console.WriteLine();
+        Console.WriteLine("Lägg till ny kurs");
 
-        course.CourseNumber = ConsoleInputManager.GetStringFromConsole("Skriv kursnummer");
-        course.Title = ConsoleInputManager.GetStringFromConsole("Skriv kurstitel");
-        course.CourseType = ConsoleInputManager.GetEnumFromConsole<CourseType>("Välj kurstyp");
-        course.Days = ConsoleInputManager.GetIntFromConsole("Skriv antal dagar i kursen");
-        course.StartDate = ConsoleInputManager.GetDateFromConsole("Skriv startdatum");
-        course.EndDate = ConsoleInputManager.GetDateFromConsole("Skriv slutdatum");
+        try
+        {
+            var course = new Course();
 
-        _allCourses.Add(course);
-        Storage<Course>.Write(_path, _allCourses);
+            course.CourseNumber = ConsoleInputManager.GetStringFromConsole("Skriv kursnummer");
+            course.Title = ConsoleInputManager.GetStringFromConsole("Skriv kurstitel");
+            course.CourseType = ConsoleInputManager.GetEnumFromConsole<CourseType>("Välj kurstyp");
+            course.Days = ConsoleInputManager.GetIntFromConsole("Skriv antal dagar i kursen");
+            course.StartDate = ConsoleInputManager.GetDateFromConsole("Skriv startdatum");
+            course.EndDate = ConsoleInputManager.GetDateFromConsole("Skriv slutdatum");
+
+            _allCourses.Add(course);
+            Storage<Course>.Write(_path, _allCourses);
+
+            Console.WriteLine("Kursen har sparats");
+            Console.WriteLine();
+            ConsoleInputManager.WaitForAnyKeyToReturnToMenu();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Kursen kunde inte sparas. Felmeddelande: " + ex.Message);
+        }
+
     }
 
     public static void ListCourses()
     {
+        Console.WriteLine();
+
         if (_allCourses.Count == 0)
         {
-            Console.WriteLine("No courses found.");
+            Console.WriteLine("Kurslistan är tom.");
         }
         else
         {
-            ConsoleOutputManager.WriteList("Kurser", _allCourses.Select(o => o.ToString()).ToList()!);
+            ConsoleOutputManager.WriteList("Kurser", _allCourses.Select(o => o.ToString()).ToArray());
         }
+
+        Console.WriteLine();
+        ConsoleInputManager.WaitForAnyKeyToReturnToMenu();
     }
 }

@@ -4,21 +4,15 @@ namespace Core.Models;
 
 public static class ConsoleOutputManager
 {
-    public static void WriteBreak(bool large)
+    public static void WriteBreak()
     {
-        if (large)
-            Console.WriteLine();
-
-        Console.WriteLine("----------------------------------------------");
-
-        if (large)
-            Console.WriteLine();
+        Console.WriteLine("---------------------------------------------------------------------");
     }
 
-    public static void WriteList(string listTitle, List<string> strs)
+    public static void WriteList(string listTitle, string[] strs)
     {
         Console.WriteLine(listTitle);
-        WriteBreak(false);
+        WriteBreak();
         foreach (var s in strs)
             Console.WriteLine(s.ToString());
     }
