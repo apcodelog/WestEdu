@@ -2,7 +2,7 @@ using System;
 
 namespace Core.Models;
 
-public static class ConsoleOutputManager
+public static class ConsoleOutputHelper
 {
     public static void WriteBreak()
     {

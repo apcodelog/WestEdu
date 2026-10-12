@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace Core.Models;
 
-public static class ConsoleInputManager
+public static class ConsoleInputHelper
 {
     public static void WaitForAnyKeyToReturnToMenu()
     {

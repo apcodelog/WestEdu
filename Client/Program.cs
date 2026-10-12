@@ -22,8 +22,8 @@ class Program
         while (true)
         {
             Console.WriteLine();
-            ConsoleOutputManager.WriteList("Menyval", menuOptions);
-            ConsoleOutputManager.WriteBreak();
+            ConsoleOutputHelper.WriteList("Menyval", menuOptions);
+            ConsoleOutputHelper.WriteBreak();
             Console.WriteLine("Välj med siffertangent eller 'X' för att avsluta");
 
             var choosen = Console.ReadKey().KeyChar;
@@ -31,11 +31,11 @@ class Program
             switch (choosen)
             {
                 case '1':
-                    CourseManager.ListCourses();
+                    CourseManager.List();
                     continue;
 
                 case '2':
-                    CourseManager.AddCourse();
+                    CourseManager.Add();
                     continue;
 
                 case 'x':
