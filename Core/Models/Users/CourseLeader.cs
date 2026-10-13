@@ -2,7 +2,7 @@ using System;
 
 namespace Core.Models.Users;
 
-public class CourseLeader : Teacher
+public class CourseLeader : SchoolAdmin
 {
-    public DateTime HiringDate { get; set; }
+    public List<Course> Courses { get; set; }
 }

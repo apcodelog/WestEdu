@@ -1,4 +1,5 @@
 ﻿using Core.Models;
+using Core.Models.Managers;
 
 namespace Client;
 
@@ -31,11 +32,11 @@ class Program
             switch (choosen)
             {
                 case '1':
-                    CourseManager.List();
+                    new CourseManager().ShowList();
                     continue;
 
                 case '2':
-                    CourseManager.Add();
+                    new CourseManager().Add();
                     continue;
 
                 case 'x':

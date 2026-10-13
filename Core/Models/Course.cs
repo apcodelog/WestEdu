@@ -13,6 +13,24 @@ public class Course
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 
+    public Course(
+        string courseNumber,
+        string title,
+        CourseType courseType,
+        int days,
+        DateTime startDate,
+        DateTime endDate
+    )
+    {
+        // Must match (except for case) for JsonSerializer.Deserialize to work
+        CourseNumber = courseNumber;
+        Title = title;
+        CourseType = courseType;
+        Days = days;
+        StartDate = startDate;
+        EndDate = endDate;
+    }
+
     public override string ToString()
     {
         return $"Kursnr.: {CourseNumber} Titel: {Title} Kurstyp: {CourseType} Längd: {Days} dagar Startdatum: {StartDate.ToShortDateString()} Slutdatum: {EndDate.ToShortDateString()}";

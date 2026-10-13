@@ -1,9 +1,9 @@
 using System;
 using Core.Models.Users;
 
-namespace Core.Models;
+namespace Core.Models.Managers;
 
-public static class UserManager<T> where T : User, new()
+public static class UserManager<T> where T : UserBase, new()
 {
     public static T AddUser()
     {

@@ -2,7 +2,7 @@ using System;
 
 namespace Core.Models.Users;
 
-public class Student : User
+public class Student : UserBase
 {
 
 }

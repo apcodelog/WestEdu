@@ -2,7 +2,7 @@ using System;
 
 namespace Core.Models.Users;
 
-public abstract class User
+public abstract class UserBase
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string FirstName { get; set; }
