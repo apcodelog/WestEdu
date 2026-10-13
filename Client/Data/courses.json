@@ -34,5 +34,14 @@
     "days": 45,
     "startDate": "2000-04-01T00:00:00",
     "endDate": "2000-06-15T00:00:00"
+  },
+  {
+    "id": "b0a401f4-0bea-428f-ba32-c1c61763afa6",
+    "courseNumber": "405",
+    "title": "Java Debug och Test",
+    "courseType": 2,
+    "days": 45,
+    "startDate": "2000-05-01T00:00:00",
+    "endDate": "2000-07-01T00:00:00"
   }
 ]

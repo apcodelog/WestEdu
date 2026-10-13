@@ -21,14 +21,16 @@ public class CourseManager : IManager
 
         try
         {
-            var course = new Course(
-                ConsoleInputHelper.GetStringFromConsole("Skriv kursnummer"),
-                ConsoleInputHelper.GetStringFromConsole("Skriv kurstitel"),
-                ConsoleInputHelper.GetEnumFromConsole<CourseType>("Välj kurstyp"),
-                ConsoleInputHelper.GetIntFromConsole("Skriv antal dagar i kursen"),
-                ConsoleInputHelper.GetDateFromConsole("Skriv startdatum"),
-                ConsoleInputHelper.GetDateFromConsole("Skriv slutdatum")
-            );
+            var course = new Course()
+            {
+                CourseNumber = ConsoleInputHelper.GetString("Skriv kursnummer"),
+                Title = ConsoleInputHelper.GetString("Skriv kurstitel"),
+                CourseType = ConsoleInputHelper.GetEnum<CourseType>("Välj kurstyp"),
+                Days = ConsoleInputHelper.GetInt("Skriv antal dagar i kursen"),
+                StartDate = ConsoleInputHelper.GetDate("Skriv startdatum"),
+                EndDate = ConsoleInputHelper.GetDate("Skriv slutdatum")
+            };
+                
             _allCourses.Add(course);
             Storage<Course>.Write(_path, _allCourses);
 
@@ -43,22 +45,5 @@ public class CourseManager : IManager
             ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
         }
 
-    }
-
-    public void ShowList()
-    {
-        Console.WriteLine();
-
-        if (_allCourses.Count == 0)
-        {
-            Console.WriteLine("Kurslistan är tom.");
-        }
-        else
-        {
-            ConsoleOutputHelper.WriteList("Kurser", _allCourses.Select(o => o.ToString()).ToArray());
-        }
-
-        Console.WriteLine();
-        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 }

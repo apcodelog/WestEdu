@@ -10,7 +10,7 @@ public static class ConsoleInputHelper
         Console.ReadKey(true);
     }
 
-    public static string GetStringFromConsole(string label)
+    public static string GetString(string label)
     {
         while (true)
         {
@@ -24,7 +24,7 @@ public static class ConsoleInputHelper
         }
     }
 
-    public static int GetIntFromConsole(string label)
+    public static int GetInt(string label)
     {
         while (true)
         {
@@ -38,7 +38,7 @@ public static class ConsoleInputHelper
         }
     }
 
-    public static T GetEnumFromConsole<T>(string label) where T : struct, Enum
+    public static T GetEnum<T>(string label) where T : struct, Enum
     {
         while (true)
         {
@@ -64,7 +64,7 @@ public static class ConsoleInputHelper
         }
     }
 
-    public static DateTime GetDateFromConsole(string label)
+    public static DateTime GetDate(string label)
     {
         while (true)
         {
@@ -77,5 +77,15 @@ public static class ConsoleInputHelper
             Console.WriteLine("Vänligen försök igen");
 
         }
+    }
+
+    public static Address GetAddress()
+    {
+        return new Address()
+        {
+            StreetAddress = GetString("Skriv gatuadress"),
+            PostalCode = GetString("Skriv postkod"),
+            Town = GetString("Skriv stad")
+        };
     }
 }

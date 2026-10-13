@@ -1,0 +1,14 @@
+[
+  {
+    "id": "412f7b8d-2d26-4417-a142-eb82906eb2f7",
+    "firstName": "Glenn",
+    "lastName": "Hysen",
+    "phone": "+46 070 123456",
+    "ssn": "19800101-1234",
+    "address": {
+      "streetAddress": "Fotbollsgata 42",
+      "postalCode": "987 65",
+      "town": "Göteborg"
+    }
+  }
+]
