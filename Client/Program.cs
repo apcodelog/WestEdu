@@ -6,8 +6,19 @@ namespace Client;
 
 class Program
 {
-    private static readonly string _dataPathCourses = Path.Combine(Environment.CurrentDirectory, "Data", "courses.json");
-    private static readonly string _dataPathStudents = Path.Combine(Environment.CurrentDirectory, "Data", "students.json");
+    private readonly static DataGroup _dataGroupCourses = new(
+        Path.Combine(Environment.CurrentDirectory, "Data", "courses.json"),
+        "Kurs",
+        "Kursen",
+        "Kurser"
+    );
+
+    private readonly static DataGroup _dataGroupStudents = new(
+        Path.Combine(Environment.CurrentDirectory, "Data", "students.json"),
+        "Student",
+        "Studenten",
+        "Studenter"
+    );
 
     static void Main()
     {
@@ -20,9 +31,9 @@ class Program
     {
         List<string> menuOptions = [
             "1 Visa alla kurser",
-            "2 Lägg till kurs",
+            "2 Visa alla studenter",
             "",
-            "3 Visa alla studenter",
+            "3 Lägg till kurs",
             "4 Lägg till student",
             "",
             "X Avsluta"
@@ -40,19 +51,19 @@ class Program
             switch (choosen)
             {
                 case '1':
-                    new ShowListManager<Course>("Kurser", _dataPathCourses).ShowList();
+                    new ShowListManager<Course>(_dataGroupCourses.TitlePlural , _dataGroupCourses.Path).ShowList();
                     continue;
 
                 case '2':
-                    new CourseManager().Add();
+                    new ShowListManager<Student>(_dataGroupStudents.TitlePlural, _dataGroupStudents.Path).ShowList();
                     continue;
 
                 case '3':
-                    new ShowListManager<Student>("Studenter", _dataPathStudents).ShowList();
+                    new CourseManager().Add();
                     continue;
 
                 case '4':
-                    new StudentManager().Add();
+                    AddObject<Student>(_dataGroupStudents);
                     continue;
 
                 case 'x':
@@ -64,5 +75,36 @@ class Program
                     continue;
             }
         }
+    }
+
+    private static void AddObject<T>(DataGroup dataGroup)
+    {
+        Console.WriteLine();
+        Console.WriteLine($"Lägg till ny {dataGroup.TitleIndefinite}");
+
+        try
+        {
+            var student = new Student()
+            {
+                FirstName = ConsoleInputHelper.GetString("Skriv förnamn"),
+                LastName = ConsoleInputHelper.GetString("Skriv efternamn"),
+                Phone = ConsoleInputHelper.GetString("Skriv telefonnr."),
+                SSN = ConsoleInputHelper.GetString("Skriv personnr."),
+                Address = ConsoleInputHelper.GetAddress()
+            };  
+
+            var all = Storage<Student>.Read(dataGroup.Path);
+            all.Add(student);
+            Storage<Student>.Write(dataGroup.Path, all);
+
+            Console.WriteLine($"{dataGroup.TitleDefinite} har sparats");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
+        }
+        
+        Console.WriteLine();
+        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 }

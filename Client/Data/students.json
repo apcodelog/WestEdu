@@ -10,5 +10,17 @@
       "postalCode": "987 65",
       "town": "Göteborg"
     }
+  },
+  {
+    "id": "f0d2995d-667f-4cb7-ad88-d1d2dc12fa12",
+    "firstName": "Henrik",
+    "lastName": "Lundqvist",
+    "phone": "+1 564 5688 87",
+    "ssn": "19870102-9876",
+    "address": {
+      "streetAddress": "Madison Square 1",
+      "postalCode": "8764",
+      "town": "New York"
+    }
   }
 ]
