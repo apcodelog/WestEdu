@@ -9,7 +9,7 @@ public class Course
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string CourseNumber { get; set; }
     public required string Title { get; set; }
-    public required CourseType CourseType { get; set; }
+    public required CourseTypeEnum CourseType { get; set; }
     public required int Days { get; set; }
     public required DateTime StartDate { get; set; }
     public required DateTime EndDate { get; set; }

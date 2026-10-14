@@ -1,10 +1,11 @@
 [
   {
+    "ssn": "19800101-1234",
     "id": "412f7b8d-2d26-4417-a142-eb82906eb2f7",
     "firstName": "Glenn",
     "lastName": "Hysen",
     "phone": "+46 070 123456",
-    "ssn": "19800101-1234",
+    "email": "glenn@mail.com",
     "address": {
       "streetAddress": "Fotbollsgata 42",
       "postalCode": "987 65",
@@ -12,15 +13,29 @@
     }
   },
   {
+    "ssn": "19870102-9876",
     "id": "f0d2995d-667f-4cb7-ad88-d1d2dc12fa12",
     "firstName": "Henrik",
     "lastName": "Lundqvist",
     "phone": "+1 564 5688 87",
-    "ssn": "19870102-9876",
+    "email": "henrik@mail.com",
     "address": {
       "streetAddress": "Madison Square 1",
       "postalCode": "8764",
       "town": "New York"
+    }
+  },
+  {
+    "ssn": "19950415-7531",
+    "id": "ece9a9c8-e26d-4638-a54d-4ef86583390a",
+    "firstName": "Mondo",
+    "lastName": "Duplantis",
+    "phone": "+46 070 987654",
+    "email": "mondo@mail.com",
+    "address": {
+      "streetAddress": "Topstreet 6",
+      "postalCode": "86 876",
+      "town": "Monaco"
     }
   }
 ]

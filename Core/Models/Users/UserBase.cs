@@ -8,11 +8,11 @@ public abstract class UserBase
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Phone { get; set; }
-    public required string SSN { get; set; } // Social Security Number
+    public required string Email { get; set; }
     public required Address Address { get; set; }
 
     public override string ToString()
     {
-        return $"{FirstName} {LastName} Telefonnr.: {Phone} Personnr.: {SSN} Adress: {Address}";
+        return $"{FirstName} {LastName} Telefonnr.: {Phone} E-post: {Email} Adress: {Address}";
     }
 }

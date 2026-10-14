@@ -1,13 +1,13 @@
 namespace Core.Enums;
 
-public enum CourseType
+public enum CourseTypeEnum
 {
     Unknown,
     OnSite,
     Digital
 }
 
-public enum KnowledgeTag
+public enum KnowledgeTagEnum
 {
     Unknown,
     CSharp,

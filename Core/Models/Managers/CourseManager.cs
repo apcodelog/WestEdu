@@ -25,7 +25,7 @@ public class CourseManager : IManager
             {
                 CourseNumber = ConsoleInputHelper.GetString("Skriv kursnummer"),
                 Title = ConsoleInputHelper.GetString("Skriv kurstitel"),
-                CourseType = ConsoleInputHelper.GetEnum<CourseType>("Välj kurstyp"),
+                CourseType = ConsoleInputHelper.GetEnum<CourseTypeEnum>("Välj kurstyp"),
                 Days = ConsoleInputHelper.GetInt("Skriv antal dagar i kursen"),
                 StartDate = ConsoleInputHelper.GetDate("Skriv startdatum"),
                 EndDate = ConsoleInputHelper.GetDate("Skriv slutdatum")

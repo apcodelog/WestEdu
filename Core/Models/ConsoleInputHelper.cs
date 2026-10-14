@@ -1,4 +1,5 @@
 using System.Globalization;
+using Core.Enums;
 
 namespace Core.Models;
 
@@ -87,5 +88,17 @@ public static class ConsoleInputHelper
             PostalCode = GetString("Skriv postkod"),
             Town = GetString("Skriv stad")
         };
+    }
+
+    public static List<Course> GetCourses()
+    {
+        Console.WriteLine("Not implemented.");
+        return [];
+    }
+
+    public static List<KnowledgeTagEnum> GetKnowledgeTags()
+    {
+        Console.WriteLine("Not implemented.");
+        return [];
     }
 }

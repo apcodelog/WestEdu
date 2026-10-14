@@ -2,7 +2,12 @@ using System;
 
 namespace Core.Models.Users;
 
-public class SchoolAdmin : UserBase
+public class SchoolAdmin : Student
 {
-    public DateTime HiringDate { get; set; }
+    public required DateTime HiringDate { get; set; }
+
+    public override string ToString()
+    {
+        return base.ToString() + $" Anställningsdatum: {HiringDate}";
+    }
 }

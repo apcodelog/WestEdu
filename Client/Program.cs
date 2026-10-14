@@ -1,4 +1,6 @@
-﻿using Core.Models;
+﻿using System.Runtime.Serialization.Formatters;
+using Core.Interfaces;
+using Core.Models;
 using Core.Models.Managers;
 using Core.Models.Users;
 
@@ -20,6 +22,13 @@ class Program
         "Studenter"
     );
 
+    private readonly static DataGroup _dataGroupTeachers = new(
+        Path.Combine(Environment.CurrentDirectory, "Data", "teachers.json"),
+        "Lärare",
+        "Läraren",
+        "Lärarer"
+    );
+
     static void Main()
     {
         Console.WriteLine();
@@ -35,6 +44,7 @@ class Program
             "",
             "3 Lägg till kurs",
             "4 Lägg till student",
+            "5 Lägg till lärare",
             "",
             "X Avsluta"
         ];
@@ -63,7 +73,11 @@ class Program
                     continue;
 
                 case '4':
-                    AddObject<Student>(_dataGroupStudents);
+                    AddUser<Student>(_dataGroupStudents);
+                    continue;
+
+                case '5':
+                    AddUser<Teacher>(_dataGroupTeachers);
                     continue;
 
                 case 'x':
@@ -77,34 +91,122 @@ class Program
         }
     }
 
-    private static void AddObject<T>(DataGroup dataGroup)
+    private static void AddUser<T>(DataGroup dataGroup)
     {
-        Console.WriteLine();
-        Console.WriteLine($"Lägg till ny {dataGroup.TitleIndefinite}");
-
         try
         {
-            var student = new Student()
-            {
-                FirstName = ConsoleInputHelper.GetString("Skriv förnamn"),
-                LastName = ConsoleInputHelper.GetString("Skriv efternamn"),
-                Phone = ConsoleInputHelper.GetString("Skriv telefonnr."),
-                SSN = ConsoleInputHelper.GetString("Skriv personnr."),
-                Address = ConsoleInputHelper.GetAddress()
-            };  
+            Console.WriteLine();
+            Console.WriteLine($"Lägg till ny {dataGroup.TitleIndefinite}");
 
-            var all = Storage<Student>.Read(dataGroup.Path);
-            all.Add(student);
-            Storage<Student>.Write(dataGroup.Path, all);
+            var firstName = ConsoleInputHelper.GetString("Skriv förnamn");
+            var lastName = ConsoleInputHelper.GetString("Skriv efternamn");
+            var phone = ConsoleInputHelper.GetString("Skriv telefonnr.");
+            var email = ConsoleInputHelper.GetString("Skriv e-post");
+            var address = ConsoleInputHelper.GetAddress();
+            
+            if (typeof(T) == typeof(Teacher))
+            {
+                var courses = ConsoleInputHelper.GetCourses();
+                var knowledgeList = ConsoleInputHelper.GetKnowledgeTags();
+
+                Teacher teacher = new Teacher()
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Phone = phone,
+                    Email = email,
+                    Address = address,
+                    Courses = courses,
+                    KnowledgeList = knowledgeList
+                };
+
+                AddUserFinal(dataGroup, teacher);
+            }
+            else if (typeof(T) == typeof(Student) || typeof(T) == typeof(SchoolAdmin) || typeof(T) == typeof(CourseLeader))
+            {
+                var ssn = ConsoleInputHelper.GetString("Skriv personnr.");
+                
+                if (typeof(T) == typeof(Student))
+                {
+                    Student student = new Student()
+                    {
+                        FirstName = firstName,
+                        LastName = lastName,
+                        Phone = phone,
+                        Email = email,
+                        SSN = ssn,
+                        Address = address
+                    };
+
+                    AddUserFinal(dataGroup, student);
+                }
+                else
+                {
+                    var hiringDate = ConsoleInputHelper.GetDate("Skriv anställningsdatum");
+
+                    if (typeof(T) == typeof(SchoolAdmin))
+                    {
+                        SchoolAdmin schoolAdmin = new SchoolAdmin()
+                        {
+                            FirstName = firstName,
+                            LastName = lastName,
+                            Phone = phone,
+                            Email = email,
+                            SSN = ssn,
+                            Address = address,
+                            HiringDate = hiringDate
+                        };
+
+                        AddUserFinal(dataGroup, schoolAdmin);
+                    }
+                    else if (typeof(T) == typeof(CourseLeader))
+                    {
+                        var courses = ConsoleInputHelper.GetCourses();
+
+                        CourseLeader courseLeader = new CourseLeader()
+                        {
+                            FirstName = firstName,
+                            LastName = lastName,
+                            Phone = phone,
+                            Email = email,
+                            SSN = ssn,
+                            Address = address,
+                            HiringDate = hiringDate,
+                            Courses = courses
+                        };
+
+                        AddUserFinal(dataGroup, courseLeader);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine($"The type {typeof(T)} was not expected.");
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        
+        Console.WriteLine();
+        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
+    }
+
+    private static void AddUserFinal<T>(DataGroup dataGroup, T createdObj)
+    {
+        try
+        {
+            var all = Storage<T>.Read(dataGroup.Path);
+            all.Add(createdObj);
+            Storage<T>.Write(dataGroup.Path, all);
 
             Console.WriteLine($"{dataGroup.TitleDefinite} har sparats");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
+            throw new Exception($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
         }
-        
-        Console.WriteLine();
-        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 }
