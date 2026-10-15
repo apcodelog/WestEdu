@@ -27,6 +27,18 @@ class Program
             "Lärare",
             "Läraren",
             "Lärarer"
+        )},
+        {typeof(CourseLeader), new DataGroup(
+            Path.Combine(Environment.CurrentDirectory, "Data", "courseLeaders.json"),
+            "Kursledare",
+            "Kursledaren",
+            "Kursledare"
+        )},
+        {typeof(SchoolAdmin), new DataGroup(
+            Path.Combine(Environment.CurrentDirectory, "Data", "schoolAdmins.json"),
+            "Administratör",
+            "Administratören",
+            "Administratörer"
         )}
     };
 
@@ -39,13 +51,12 @@ class Program
 
     private static void MenuLoop()
     {
-        List<string> menuOptions = [
-            "1 Visa alla kurser",
-            "2 Visa alla studenter",
-            "",
-            "3 Lägg till kurs",
-            "4 Lägg till student",
-            "5 Lägg till lärare",
+        List<string> menuLines = [
+            "1 Lägg till kurs                       6 Visa alla kurser",
+            "2 Lägg till student                    7 Visa alla studenter",
+            "3 Lägg till lärare",
+            "4 Lägg till utbildningsledare",
+            "5 Lägg till administratör",
             "",
             "X Avsluta"
         ];
@@ -53,7 +64,7 @@ class Program
         while (true)
         {
             Console.WriteLine();
-            ConsoleOutputHelper.WriteList("Menyval", menuOptions);
+            ConsoleOutputHelper.WriteList("Meny", menuLines);
             ConsoleOutputHelper.WriteBreak();
             Console.WriteLine("Välj med siffertangent eller 'X' för att avsluta");
 
@@ -61,24 +72,32 @@ class Program
             Console.WriteLine();
             switch (choosen)
             {
+                case '6':
+                    new ShowListManager<Course>().ShowList(_dataGroupMap[typeof(Course)]);
+                    continue;
+
+                case '7':
+                    new ShowListManager<Student>().ShowList(_dataGroupMap[typeof(Student)]);
+                    continue;
+
                 case '1':
-                    new ShowListManager<Course>(_dataGroupMap[typeof(Course)].TitlePlural , _dataGroupMap[typeof(Course)].Path).ShowList();
+                    AddUser<Course>();
                     continue;
 
                 case '2':
-                    new ShowListManager<Student>(_dataGroupMap[typeof(Student)].TitlePlural, _dataGroupMap[typeof(Student)].Path).ShowList();
-                    continue;
-
-                case '3':
-                    new CourseManager().Add();
-                    continue;
-
-                case '4':
                     AddUser<Student>();
                     continue;
 
-                case '5':
+                case '3':
                     AddUser<Teacher>();
+                    continue;
+
+                case '4':
+                    AddUser<CourseLeader>();
+                    continue;
+
+                case '5':
+                    AddUser<SchoolAdmin>();
                     continue;
 
                 case 'x':
@@ -92,7 +111,7 @@ class Program
         }
     }
 
-    private static void AddUser<T>() where T : IUser, new()
+    private static void AddUser<T>() where T : IDataObject, new()
     {
         var dataGroup = _dataGroupMap[typeof(T)];
         

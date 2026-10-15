@@ -1,0 +1,16 @@
+[
+  {
+    "hiringDate": "2025-06-01T00:00:00",
+    "ssn": "19700820-1020",
+    "id": "11d097cd-f48d-4e1c-9dd1-dea9e880a524",
+    "firstName": "Graham",
+    "lastName": "Potter",
+    "phone": "+46 0721 453 478",
+    "email": "potter@football.uk",
+    "address": {
+      "streetAddress": "Downtown Abbey 15",
+      "postalCode": "68 TXG",
+      "town": "London"
+    }
+  }
+]

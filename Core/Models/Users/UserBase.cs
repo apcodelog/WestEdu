@@ -3,7 +3,7 @@ using Core.Interfaces;
 
 namespace Core.Models.Users;
 
-public abstract class UserBase : IUser
+public abstract class UserBase : IDataObject
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string FirstName { get; set; } = "";

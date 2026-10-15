@@ -4,25 +4,16 @@ namespace Core.Models.Managers;
 
 public class ShowListManager<T>
 {
-    private string _path;
-    private string _listTitle;
-
-    public ShowListManager(string listTitle, string path)
-    {
-        _listTitle = listTitle;
-        _path = path;
-    }
-
-    public void ShowList()
+    public void ShowList(DataGroup dataGroup)
     {
         Console.WriteLine();
 
-        List<T> objs = Storage<T>.Read(_path);
+        List<T> objs = Storage<T>.Read(dataGroup.Path);
         
         if (objs.Count == 0)
-            Console.WriteLine("Listan är tom.");
+            Console.WriteLine($"Listan med {dataGroup.TitlePlural} är tom.");
         else
-            ConsoleOutputHelper.WriteList(_listTitle, objs);
+            ConsoleOutputHelper.WriteList(dataGroup.TitlePlural, objs);
 
         Console.WriteLine();
         ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();

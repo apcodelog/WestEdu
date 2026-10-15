@@ -2,7 +2,7 @@ using System;
 
 namespace Core.Interfaces;
 
-public interface IUser
+public interface IDataObject
 {
     void SetUserInfo();
 }

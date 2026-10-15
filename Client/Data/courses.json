@@ -43,5 +43,14 @@
     "days": 45,
     "startDate": "2000-05-01T00:00:00",
     "endDate": "2000-07-01T00:00:00"
+  },
+  {
+    "id": "e82bd84c-8a00-4d07-8339-1ec9d04ddc31",
+    "courseNumber": "57",
+    "title": "Refactoring in C#",
+    "courseType": 1,
+    "days": 30,
+    "startDate": "2001-01-10T00:00:00",
+    "endDate": "2001-02-15T00:00:00"
   }
 ]

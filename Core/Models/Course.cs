@@ -1,19 +1,30 @@
 using System;
 using System.Data.Common;
 using Core.Enums;
+using Core.Interfaces;
 
 namespace Core.Models;
 
-public class Course
+public class Course : IDataObject
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public required string CourseNumber { get; set; }
-    public required string Title { get; set; }
-    public required CourseTypeEnum CourseType { get; set; }
-    public required int Days { get; set; }
-    public required DateTime StartDate { get; set; }
-    public required DateTime EndDate { get; set; }
+    public string CourseNumber { get; set; } = "";
+    public string Title { get; set; } = "";
+    public CourseTypeEnum CourseType { get; set; }
+    public int Days { get; set; }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
     
+    public void SetUserInfo()
+    {
+        CourseNumber = ConsoleInputHelper.GetString("Skriv kursnummer");
+        Title = ConsoleInputHelper.GetString("Skriv kurstitel");
+        CourseType = ConsoleInputHelper.GetEnum<CourseTypeEnum>("Välj kurstyp");
+        Days = ConsoleInputHelper.GetInt("Skriv antal dagar i kursen");
+        StartDate = ConsoleInputHelper.GetDate("Skriv startdatum");
+        EndDate = ConsoleInputHelper.GetDate("Skriv slutdatum");
+    }
+
     public override string ToString()
     {
         return $"Kursnr.: {CourseNumber} Titel: {Title} Kurstyp: {CourseType} Längd: {Days} dagar Startdatum: {StartDate.ToShortDateString()} Slutdatum: {EndDate.ToShortDateString()}";

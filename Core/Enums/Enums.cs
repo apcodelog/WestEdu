@@ -4,7 +4,7 @@ public enum CourseTypeEnum
 {
     Unknown,
     OnSite,
-    Digital
+    Online
 }
 
 public enum KnowledgeTagEnum
