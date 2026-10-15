@@ -1,6 +1,6 @@
 namespace Core.Models;
 
-public record class DataGroup
+public record DataGroup
 {
     public string Path { get; }
     public string TitleIndefinite { get; }

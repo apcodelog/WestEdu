@@ -21,6 +21,16 @@ public abstract class UserBase : IDataObject
         Address = ConsoleInputHelper.GetAddress();
     }
 
+    public virtual List<string> GetInfoCells()
+    {
+        return [
+            $"{FirstName} {LastName}",
+            $"Telefonnr.: {Phone}",
+            $"E-post: {Email}",
+            $"Adress: {Address}"
+        ];
+    }
+
     public override string ToString()
     {
         return $"{FirstName} {LastName} Telefonnr.: {Phone} E-post: {Email} Adress: {Address}";

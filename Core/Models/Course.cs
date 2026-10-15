@@ -12,9 +12,9 @@ public class Course : IDataObject
     public string Title { get; set; } = "";
     public CourseTypeEnum CourseType { get; set; }
     public int Days { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    
+    public DateOnly StartDate { get; set; }
+    public DateOnly EndDate { get; set; }
+
     public void SetUserInfo()
     {
         CourseNumber = ConsoleInputHelper.GetString("Skriv kursnummer");
@@ -24,9 +24,21 @@ public class Course : IDataObject
         StartDate = ConsoleInputHelper.GetDate("Skriv startdatum");
         EndDate = ConsoleInputHelper.GetDate("Skriv slutdatum");
     }
+    
+    public List<string> GetInfoCells()
+    {
+        return [
+            $"Kursnr.: {CourseNumber}",
+            $"Titel: {Title}",
+            $"Kurstyp: {CourseType.ToSwedish()}",
+            $"Längd: {Days} dagar",
+            $"Startdatum: {StartDate}",
+            $"Slutdatum: {EndDate}"
+        ];
+    }
 
     public override string ToString()
     {
-        return $"Kursnr.: {CourseNumber} Titel: {Title} Kurstyp: {CourseType} Längd: {Days} dagar Startdatum: {StartDate.ToShortDateString()} Slutdatum: {EndDate.ToShortDateString()}";
+        return $"Kursnr.: {CourseNumber} Titel: {Title} Kurstyp: {CourseType.ToSwedish()} Längd: {Days} dagar Startdatum: {StartDate} Slutdatum: {EndDate}";
     }
 }

@@ -13,6 +13,13 @@ public class Student : UserBase
         SSN = ConsoleInputHelper.GetString("Skriv personnr.");
     }
 
+    public override List<string> GetInfoCells()
+    {
+        var cells = base.GetInfoCells();
+        cells.Add($"Personnr.: {SSN}");
+        return cells;
+    }
+
     public override string ToString()
     {
         return base.ToString() + $" Personnr.: {SSN}";

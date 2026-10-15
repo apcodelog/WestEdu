@@ -65,14 +65,14 @@ public static class ConsoleInputHelper
         }
     }
 
-    public static DateTime GetDate(string label)
+    public static DateOnly GetDate(string label)
     {
         while (true)
         {
             Console.WriteLine(label + " (ÅÅÅÅ-MM-DD):");
             var str = Console.ReadLine();
 
-            if (DateTime.TryParseExact(str, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var res))
+            if (DateOnly.TryParseExact(str, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var res))
                 return res;
             
             Console.WriteLine("Vänligen försök igen");

@@ -12,6 +12,13 @@ public class CourseLeader : SchoolAdmin
         Courses = ConsoleInputHelper.GetCourses("Lägg till kurser");
     }
 
+    public override List<string> GetInfoCells()
+    {
+        var cells = base.GetInfoCells();
+        cells.Add($"Kurser: {string.Join(", ", Courses)}");
+        return cells;
+    }
+
     public override string ToString()
     {
         return base.ToString() + $" Kurser: {string.Join(", ", Courses)}";

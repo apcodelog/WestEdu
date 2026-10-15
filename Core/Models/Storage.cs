@@ -4,9 +4,9 @@ using System.Text.Json;
 
 namespace Core.Models;
 
-public static class Storage<T>
+public class Storage<T>
 {
-    private static JsonSerializerOptions _options = new JsonSerializerOptions
+    private readonly JsonSerializerOptions _options = new JsonSerializerOptions
     {
         WriteIndented = true,
         PropertyNameCaseInsensitive = true,
@@ -14,7 +14,7 @@ public static class Storage<T>
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
     };
 
-    public static List<T> Read(string path)
+    public List<T> Read(string path)
     {
         try
         {
@@ -33,7 +33,7 @@ public static class Storage<T>
         }
     }
 
-    public static void Write(string path, List<T> data)
+    public void Write(string path, List<T> data)
     {
         try
         {

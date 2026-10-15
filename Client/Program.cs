@@ -8,40 +8,6 @@ namespace Client;
 
 class Program
 {
-    private readonly static Dictionary<Type, DataGroup> _dataGroupMap = new()
-    {
-        {typeof(Course), new DataGroup(
-            Path.Combine(Environment.CurrentDirectory, "Data", "courses.json"),
-            "Kurs",
-            "Kursen",
-            "Kurser"
-        )},
-        {typeof(Student), new DataGroup(
-            Path.Combine(Environment.CurrentDirectory, "Data", "students.json"),
-            "Student",
-            "Studenten",
-            "Studenter"
-        )},
-        {typeof(Teacher), new DataGroup(
-            Path.Combine(Environment.CurrentDirectory, "Data", "teachers.json"),
-            "Lärare",
-            "Läraren",
-            "Lärarer"
-        )},
-        {typeof(CourseLeader), new DataGroup(
-            Path.Combine(Environment.CurrentDirectory, "Data", "courseLeaders.json"),
-            "Kursledare",
-            "Kursledaren",
-            "Kursledare"
-        )},
-        {typeof(SchoolAdmin), new DataGroup(
-            Path.Combine(Environment.CurrentDirectory, "Data", "schoolAdmins.json"),
-            "Administratör",
-            "Administratören",
-            "Administratörer"
-        )}
-    };
-
     static void Main()
     {
         Console.WriteLine();
@@ -64,7 +30,13 @@ class Program
         while (true)
         {
             Console.WriteLine();
-            ConsoleOutputHelper.WriteList("Meny", menuLines);
+
+            Console.WriteLine("Meny");
+            ConsoleOutputHelper.WriteBreak();
+            foreach (var line in menuLines)
+            {
+                Console.WriteLine(line);
+            }
             ConsoleOutputHelper.WriteBreak();
             Console.WriteLine("Välj med siffertangent eller 'X' för att avsluta");
 
@@ -72,32 +44,32 @@ class Program
             Console.WriteLine();
             switch (choosen)
             {
-                case '6':
-                    new ShowListManager<Course>().ShowList(_dataGroupMap[typeof(Course)]);
-                    continue;
-
-                case '7':
-                    new ShowListManager<Student>().ShowList(_dataGroupMap[typeof(Student)]);
-                    continue;
-
                 case '1':
-                    AddUser<Course>();
+                    new DataObjectManager().AddUser<Course>();
                     continue;
 
                 case '2':
-                    AddUser<Student>();
+                    new DataObjectManager().AddUser<Student>();
                     continue;
 
                 case '3':
-                    AddUser<Teacher>();
+                    new DataObjectManager().AddUser<Teacher>();
                     continue;
 
                 case '4':
-                    AddUser<CourseLeader>();
+                    new DataObjectManager().AddUser<CourseLeader>();
                     continue;
 
                 case '5':
-                    AddUser<SchoolAdmin>();
+                    new DataObjectManager().AddUser<SchoolAdmin>();
+                    continue;
+
+                case '6':
+                    new DataObjectManager().ShowList<Course>();
+                    continue;
+
+                case '7':
+                    new DataObjectManager().ShowList<Student>();
                     continue;
 
                 case 'x':
@@ -109,32 +81,5 @@ class Program
                     continue;
             }
         }
-    }
-
-    private static void AddUser<T>() where T : IDataObject, new()
-    {
-        var dataGroup = _dataGroupMap[typeof(T)];
-        
-        try
-        {
-            Console.WriteLine();
-            Console.WriteLine($"Lägg till ny {dataGroup.TitleIndefinite}");
-
-            T user = new T();
-            user.SetUserInfo();
-
-            var all = Storage<T>.Read(dataGroup.Path);
-            all.Add(user);
-            Storage<T>.Write(dataGroup.Path, all);
-
-            Console.WriteLine($"{dataGroup.TitleDefinite} har sparats");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
-        }
-        
-        Console.WriteLine();
-        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 }

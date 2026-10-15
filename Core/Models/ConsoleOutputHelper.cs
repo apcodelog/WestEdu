@@ -1,4 +1,5 @@
 using System;
+using Core.Interfaces;
 
 namespace Core.Models;
 
@@ -9,16 +10,26 @@ public static class ConsoleOutputHelper
         Console.WriteLine("---------------------------------------------------------------------");
     }
 
-    public static void WriteList<T>(string listTitle, List<T> objs)
+    public static void WriteList<T>(string listTitle, List<T> objs) where T : IDataObject
     {
         Console.WriteLine(listTitle);
         WriteBreak();
+
+        var maxCellLengths = new List<int>();
+        for (int i = 0; i < objs[0].GetInfoCells().Count(); i++)
+        {
+            maxCellLengths.Add(objs.Max(o => o.GetInfoCells()[i].Length) + 2);
+        }
+
         foreach (var o in objs)
         {
-            if (o is null)
-                Console.WriteLine("Objektet kunde inte läsas in.");
-            else
-                Console.WriteLine(o.ToString());
+            var cells = o.GetInfoCells();
+            for (int i = 0; i < cells.Count(); i++)
+                Console.Write(cells[i].PadRight(maxCellLengths[i]));
+
+            Console.WriteLine();
         }
     }
+
+    
 }
