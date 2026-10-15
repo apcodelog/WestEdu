@@ -12,5 +12,19 @@
       "postalCode": "456 78",
       "town": "Teststaden"
     }
+  },
+  {
+    "knowledgeList": [],
+    "courses": [],
+    "id": "ffc5e4ad-9659-4eaf-9d4d-d868166cf2ca",
+    "firstName": "Sarah",
+    "lastName": "Sjöström",
+    "phone": "070 888 44 22",
+    "email": "sarah@mail.se",
+    "address": {
+      "streetAddress": "Vattenvägen 70",
+      "postalCode": "987 12",
+      "town": "Stockholm"
+    }
   }
 ]

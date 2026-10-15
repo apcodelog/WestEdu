@@ -8,26 +8,27 @@ namespace Client;
 
 class Program
 {
-    private readonly static DataGroup _dataGroupCourses = new(
-        Path.Combine(Environment.CurrentDirectory, "Data", "courses.json"),
-        "Kurs",
-        "Kursen",
-        "Kurser"
-    );
-
-    private readonly static DataGroup _dataGroupStudents = new(
-        Path.Combine(Environment.CurrentDirectory, "Data", "students.json"),
-        "Student",
-        "Studenten",
-        "Studenter"
-    );
-
-    private readonly static DataGroup _dataGroupTeachers = new(
-        Path.Combine(Environment.CurrentDirectory, "Data", "teachers.json"),
-        "Lärare",
-        "Läraren",
-        "Lärarer"
-    );
+    private readonly static Dictionary<Type, DataGroup> _dataGroupMap = new()
+    {
+        {typeof(Course), new DataGroup(
+            Path.Combine(Environment.CurrentDirectory, "Data", "courses.json"),
+            "Kurs",
+            "Kursen",
+            "Kurser"
+        )},
+        {typeof(Student), new DataGroup(
+            Path.Combine(Environment.CurrentDirectory, "Data", "students.json"),
+            "Student",
+            "Studenten",
+            "Studenter"
+        )},
+        {typeof(Teacher), new DataGroup(
+            Path.Combine(Environment.CurrentDirectory, "Data", "teachers.json"),
+            "Lärare",
+            "Läraren",
+            "Lärarer"
+        )}
+    };
 
     static void Main()
     {
@@ -61,11 +62,11 @@ class Program
             switch (choosen)
             {
                 case '1':
-                    new ShowListManager<Course>(_dataGroupCourses.TitlePlural , _dataGroupCourses.Path).ShowList();
+                    new ShowListManager<Course>(_dataGroupMap[typeof(Course)].TitlePlural , _dataGroupMap[typeof(Course)].Path).ShowList();
                     continue;
 
                 case '2':
-                    new ShowListManager<Student>(_dataGroupStudents.TitlePlural, _dataGroupStudents.Path).ShowList();
+                    new ShowListManager<Student>(_dataGroupMap[typeof(Student)].TitlePlural, _dataGroupMap[typeof(Student)].Path).ShowList();
                     continue;
 
                 case '3':
@@ -73,11 +74,11 @@ class Program
                     continue;
 
                 case '4':
-                    AddUser<Student>(_dataGroupStudents);
+                    AddUser<Student>();
                     continue;
 
                 case '5':
-                    AddUser<Teacher>(_dataGroupTeachers);
+                    AddUser<Teacher>();
                     continue;
 
                 case 'x':
@@ -91,122 +92,30 @@ class Program
         }
     }
 
-    private static void AddUser<T>(DataGroup dataGroup)
+    private static void AddUser<T>() where T : IUser, new()
     {
+        var dataGroup = _dataGroupMap[typeof(T)];
+        
         try
         {
             Console.WriteLine();
             Console.WriteLine($"Lägg till ny {dataGroup.TitleIndefinite}");
 
-            var firstName = ConsoleInputHelper.GetString("Skriv förnamn");
-            var lastName = ConsoleInputHelper.GetString("Skriv efternamn");
-            var phone = ConsoleInputHelper.GetString("Skriv telefonnr.");
-            var email = ConsoleInputHelper.GetString("Skriv e-post");
-            var address = ConsoleInputHelper.GetAddress();
-            
-            if (typeof(T) == typeof(Teacher))
-            {
-                var courses = ConsoleInputHelper.GetCourses();
-                var knowledgeList = ConsoleInputHelper.GetKnowledgeTags();
+            T user = new T();
+            user.SetUserInfo();
 
-                Teacher teacher = new Teacher()
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Phone = phone,
-                    Email = email,
-                    Address = address,
-                    Courses = courses,
-                    KnowledgeList = knowledgeList
-                };
-
-                AddUserFinal(dataGroup, teacher);
-            }
-            else if (typeof(T) == typeof(Student) || typeof(T) == typeof(SchoolAdmin) || typeof(T) == typeof(CourseLeader))
-            {
-                var ssn = ConsoleInputHelper.GetString("Skriv personnr.");
-                
-                if (typeof(T) == typeof(Student))
-                {
-                    Student student = new Student()
-                    {
-                        FirstName = firstName,
-                        LastName = lastName,
-                        Phone = phone,
-                        Email = email,
-                        SSN = ssn,
-                        Address = address
-                    };
-
-                    AddUserFinal(dataGroup, student);
-                }
-                else
-                {
-                    var hiringDate = ConsoleInputHelper.GetDate("Skriv anställningsdatum");
-
-                    if (typeof(T) == typeof(SchoolAdmin))
-                    {
-                        SchoolAdmin schoolAdmin = new SchoolAdmin()
-                        {
-                            FirstName = firstName,
-                            LastName = lastName,
-                            Phone = phone,
-                            Email = email,
-                            SSN = ssn,
-                            Address = address,
-                            HiringDate = hiringDate
-                        };
-
-                        AddUserFinal(dataGroup, schoolAdmin);
-                    }
-                    else if (typeof(T) == typeof(CourseLeader))
-                    {
-                        var courses = ConsoleInputHelper.GetCourses();
-
-                        CourseLeader courseLeader = new CourseLeader()
-                        {
-                            FirstName = firstName,
-                            LastName = lastName,
-                            Phone = phone,
-                            Email = email,
-                            SSN = ssn,
-                            Address = address,
-                            HiringDate = hiringDate,
-                            Courses = courses
-                        };
-
-                        AddUserFinal(dataGroup, courseLeader);
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine($"The type {typeof(T)} was not expected.");
-                return;
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-        
-        Console.WriteLine();
-        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
-    }
-
-    private static void AddUserFinal<T>(DataGroup dataGroup, T createdObj)
-    {
-        try
-        {
             var all = Storage<T>.Read(dataGroup.Path);
-            all.Add(createdObj);
+            all.Add(user);
             Storage<T>.Write(dataGroup.Path, all);
 
             Console.WriteLine($"{dataGroup.TitleDefinite} har sparats");
         }
         catch (Exception ex)
         {
-            throw new Exception($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
+            Console.WriteLine($"{dataGroup.TitleDefinite} kunde inte sparas. Felmeddelande: " + ex.Message);
         }
+        
+        Console.WriteLine();
+        ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 }

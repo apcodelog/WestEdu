@@ -5,8 +5,15 @@ namespace Core.Models.Users;
 
 public class Teacher : UserBase
 {
-    public required List<KnowledgeTagEnum> KnowledgeList { get; set; }
-    public required List<Course> Courses { get; set; }
+    public List<KnowledgeTagEnum> KnowledgeList { get; set; } = [];
+    public List<Course> Courses { get; set; } = [];
+
+    public override void SetUserInfo()
+    {
+        base.SetUserInfo();
+        KnowledgeList = ConsoleInputHelper.GetKnowledgeTags("Lägg till kunskapsområden");
+        Courses = ConsoleInputHelper.GetCourses("Lägg till kurser");
+    }
 
     public override string ToString()
     {

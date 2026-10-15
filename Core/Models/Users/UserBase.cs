@@ -1,15 +1,25 @@
 using System;
+using Core.Interfaces;
 
 namespace Core.Models.Users;
 
-public abstract class UserBase
+public abstract class UserBase : IUser
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public required string FirstName { get; set; }
-    public required string LastName { get; set; }
-    public required string Phone { get; set; }
-    public required string Email { get; set; }
-    public required Address Address { get; set; }
+    public string FirstName { get; set; } = "";
+    public string LastName { get; set; } = "";
+    public string Phone { get; set; } = "";
+    public string Email { get; set; } = "";
+    public Address? Address { get; set; }
+
+    public virtual void SetUserInfo()
+    {
+        FirstName = ConsoleInputHelper.GetString("Skriv förnamn");
+        LastName = ConsoleInputHelper.GetString("Skriv efternamn");
+        Phone = ConsoleInputHelper.GetString("Skriv telefonnr.");
+        Email = ConsoleInputHelper.GetString("Skriv e-post");
+        Address = ConsoleInputHelper.GetAddress();
+    }
 
     public override string ToString()
     {

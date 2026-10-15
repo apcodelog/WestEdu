@@ -90,13 +90,13 @@ public static class ConsoleInputHelper
         };
     }
 
-    public static List<Course> GetCourses()
+    public static List<Course> GetCourses(string label)
     {
         Console.WriteLine("Not implemented.");
         return [];
     }
 
-    public static List<KnowledgeTagEnum> GetKnowledgeTags()
+    public static List<KnowledgeTagEnum> GetKnowledgeTags(string label)
     {
         Console.WriteLine("Not implemented.");
         return [];

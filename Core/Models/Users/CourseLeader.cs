@@ -4,7 +4,13 @@ namespace Core.Models.Users;
 
 public class CourseLeader : SchoolAdmin
 {
-    public required List<Course> Courses { get; set; }
+    public List<Course> Courses { get; set; } = [];
+
+    public override void SetUserInfo()
+    {
+        base.SetUserInfo();
+        Courses = ConsoleInputHelper.GetCourses("Lägg till kurser");
+    }
 
     public override string ToString()
     {

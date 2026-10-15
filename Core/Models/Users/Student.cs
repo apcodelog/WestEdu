@@ -5,7 +5,13 @@ namespace Core.Models.Users;
 
 public class Student : UserBase
 {
-    public required string SSN { get; set; } // Social Security Number
+    public string SSN { get; set; } = ""; // Social Security Number
+
+    public override void SetUserInfo()
+    {
+        base.SetUserInfo();
+        SSN = ConsoleInputHelper.GetString("Skriv personnr.");
+    }
 
     public override string ToString()
     {
