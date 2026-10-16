@@ -1,4 +1,6 @@
 using System;
+using Core.Models.ConsoleHelpers;
+using Core.Models.Managers;
 
 namespace Core.Models.Users;
 
@@ -9,7 +11,13 @@ public class CourseLeader : SchoolAdmin
     public override void SetUserInfo()
     {
         base.SetUserInfo();
-        Courses = ConsoleInputHelper.GetCourses("Lägg till kurser");
+
+        var courses = new Storage<Course>().Read(new DataObjectManager<Course>().GetDataGroup().Path);
+        Courses = ConsoleInputHelper.GetMultiSelect(
+            "Lägg till kurser", 
+            courses,
+            courses.Select(o => o.ToStringShort()).ToList()
+            );
     }
 
     public override List<string> GetInfoCells()

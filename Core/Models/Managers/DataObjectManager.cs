@@ -1,10 +1,11 @@
 using System;
 using Core.Interfaces;
+using Core.Models.ConsoleHelpers;
 using Core.Models.Users;
 
 namespace Core.Models.Managers;
 
-public class DataObjectManager
+public class DataObjectManager<T> where T : IDataObject, new()
 {
     private readonly Dictionary<Type, DataGroup> _dataGroupMap = new()
     {
@@ -40,7 +41,12 @@ public class DataObjectManager
         )}
     };
 
-    public void AddUser<T>() where T : IDataObject, new()
+    public DataGroup GetDataGroup()
+    {
+        return _dataGroupMap[typeof(T)];
+    }
+
+    public void AddObject() 
     {
         var dataGroup = _dataGroupMap[typeof(T)];
         
@@ -68,7 +74,7 @@ public class DataObjectManager
         ConsoleInputHelper.WaitForAnyKeyToReturnToMenu();
     }
 
-    public void ShowList<T>() where T : IDataObject
+    public void ShowList()
     {
         var dataGroup = _dataGroupMap[typeof(T)];
         

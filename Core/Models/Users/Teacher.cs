@@ -1,5 +1,7 @@
 using System;
 using Core.Enums;
+using Core.Models.ConsoleHelpers;
+using Core.Models.Managers;
 
 namespace Core.Models.Users;
 
@@ -11,8 +13,20 @@ public class Teacher : UserBase
     public override void SetUserInfo()
     {
         base.SetUserInfo();
-        KnowledgeList = ConsoleInputHelper.GetKnowledgeTags("Lägg till kunskapsområden");
-        Courses = ConsoleInputHelper.GetCourses("Lägg till kurser");
+
+        var types = Enum.GetValues<KnowledgeTagEnum>().ToList();
+        var typeNames = Enum.GetNames<KnowledgeTagEnum>().ToList();
+        KnowledgeList = ConsoleInputHelper.GetMultiSelect(
+            "Lägg till kunskapsområden",
+            types,
+            typeNames);
+
+        var courses = new Storage<Course>().Read(new DataObjectManager<Course>().GetDataGroup().Path);
+        Courses = ConsoleInputHelper.GetMultiSelect(
+            "Lägg till kurser", 
+            courses,
+            courses.Select(o => o.ToStringShort()).ToList()
+            );
     }
 
     public override List<string> GetInfoCells()

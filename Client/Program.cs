@@ -1,6 +1,7 @@
 ﻿using System.Runtime.Serialization.Formatters;
 using Core.Interfaces;
 using Core.Models;
+using Core.Models.ConsoleHelpers;
 using Core.Models.Managers;
 using Core.Models.Users;
 
@@ -45,31 +46,31 @@ class Program
             switch (choosen)
             {
                 case '1':
-                    new DataObjectManager().AddUser<Course>();
+                    new DataObjectManager<Course>().AddObject();
                     continue;
 
                 case '2':
-                    new DataObjectManager().AddUser<Student>();
+                    new DataObjectManager<Student>().AddObject();
                     continue;
 
                 case '3':
-                    new DataObjectManager().AddUser<Teacher>();
+                    new DataObjectManager<Teacher>().AddObject();
                     continue;
 
                 case '4':
-                    new DataObjectManager().AddUser<CourseLeader>();
+                    new DataObjectManager<CourseLeader>().AddObject();
                     continue;
 
                 case '5':
-                    new DataObjectManager().AddUser<SchoolAdmin>();
+                    new DataObjectManager<SchoolAdmin>().AddObject();
                     continue;
 
                 case '6':
-                    new DataObjectManager().ShowList<Course>();
+                    new DataObjectManager<Course>().ShowList();
                     continue;
 
                 case '7':
-                    new DataObjectManager().ShowList<Student>();
+                    new DataObjectManager<Student>().ShowList();
                     continue;
 
                 case 'x':

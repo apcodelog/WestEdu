@@ -1,7 +1,7 @@
 using System;
 using Core.Interfaces;
 
-namespace Core.Models;
+namespace Core.Models.ConsoleHelpers;
 
 public static class ConsoleOutputHelper
 {

@@ -1,7 +1,29 @@
 [
   {
-    "knowledgeList": [],
-    "courses": [],
+    "knowledgeList": [
+      1,
+      2
+    ],
+    "courses": [
+      {
+        "id": "269ab412-27e5-4026-8a75-4af7abe35e1a",
+        "courseNumber": "57",
+        "title": "C# Grunder",
+        "courseType": 2,
+        "days": 50,
+        "startDate": "2001-02-15",
+        "endDate": "2001-04-01"
+      },
+      {
+        "id": "b0a401f4-0bea-428f-ba32-c1c61763afa6",
+        "courseNumber": "405",
+        "title": "Java Debug och Test",
+        "courseType": 2,
+        "days": 45,
+        "startDate": "2000-05-01",
+        "endDate": "2000-07-01"
+      }
+    ],
     "id": "ffc5e4ad-9659-4eaf-9d4d-d868166cf2ca",
     "firstName": "Sarah",
     "lastName": "Sjöström",

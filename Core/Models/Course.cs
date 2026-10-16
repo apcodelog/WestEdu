@@ -2,6 +2,7 @@ using System;
 using System.Data.Common;
 using Core.Enums;
 using Core.Interfaces;
+using Core.Models.ConsoleHelpers;
 
 namespace Core.Models;
 
@@ -40,5 +41,10 @@ public class Course : IDataObject
     public override string ToString()
     {
         return $"Kursnr.: {CourseNumber} Titel: {Title} Kurstyp: {CourseType.ToSwedish()} Längd: {Days} dagar Startdatum: {StartDate} Slutdatum: {EndDate}";
+    }
+
+    public string ToStringShort()
+    {
+        return $"{CourseNumber} - {Title}";
     }
 }
