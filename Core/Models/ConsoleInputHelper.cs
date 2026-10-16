@@ -86,7 +86,8 @@ public static class ConsoleInputHelper
         {
             StreetAddress = GetString("Skriv gatuadress"),
             PostalCode = GetString("Skriv postkod"),
-            Town = GetString("Skriv stad")
+            Town = GetString("Skriv stad"),
+            Country = GetString("Skriv land")
         };
     }
 
