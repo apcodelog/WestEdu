@@ -10,7 +10,23 @@
     "address": {
       "streetAddress": "Downtown Abbey 15",
       "postalCode": "68 TXG",
-      "town": "London"
+      "town": "London",
+      "country": "United Kingdom"
+    }
+  },
+  {
+    "hiringDate": "2000-01-20",
+    "ssn": "19850712-8765",
+    "id": "8d6c3388-a999-4b3c-b37e-f1b1d4f64d77",
+    "firstName": "Test",
+    "lastName": "Testson",
+    "phone": "+46 031 123 456",
+    "email": "test@test.com",
+    "address": {
+      "streetAddress": "Testgatan 10",
+      "postalCode": "687 98",
+      "town": "Teststaden",
+      "country": "Sweden"
     }
   }
 ]

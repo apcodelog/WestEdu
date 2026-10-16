@@ -2,20 +2,6 @@
   {
     "knowledgeList": [],
     "courses": [],
-    "id": "7aebb51e-3e6c-41d9-a9c8-afed411ce559",
-    "firstName": "Test",
-    "lastName": "Testson",
-    "phone": "+46 123456789",
-    "email": "test@mail.com",
-    "address": {
-      "streetAddress": "Testgatan 123",
-      "postalCode": "456 78",
-      "town": "Teststaden"
-    }
-  },
-  {
-    "knowledgeList": [],
-    "courses": [],
     "id": "ffc5e4ad-9659-4eaf-9d4d-d868166cf2ca",
     "firstName": "Sarah",
     "lastName": "Sjöström",
@@ -24,7 +10,8 @@
     "address": {
       "streetAddress": "Vattenvägen 70",
       "postalCode": "987 12",
-      "town": "Stockholm"
+      "town": "Stockholm",
+      "country": "Sweden"
     }
   }
 ]

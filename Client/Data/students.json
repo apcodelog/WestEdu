@@ -9,7 +9,8 @@
     "address": {
       "streetAddress": "Fotbollsgata 42",
       "postalCode": "987 65",
-      "town": "Göteborg"
+      "town": "Göteborg",
+      "country": "Sweden"
     }
   },
   {
@@ -22,7 +23,8 @@
     "address": {
       "streetAddress": "Madison Square 1",
       "postalCode": "8764",
-      "town": "New York"
+      "town": "New York",
+      "country": "USA"
     }
   },
   {
@@ -35,7 +37,8 @@
     "address": {
       "streetAddress": "Topstreet 6",
       "postalCode": "86 876",
-      "town": "Monaco"
+      "town": "Monaco City",
+      "country": "Monaco"
     }
   }
 ]
