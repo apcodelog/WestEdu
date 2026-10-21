@@ -33,12 +33,12 @@ public class Teacher : UserBase
     {
         var cells = base.GetInfoCells();
         cells.Add($"Kunskapsområden: {string.Join(", ", KnowledgeList)}");
-        cells.Add($"Kurser: {string.Join(", ", Courses)}");
+        cells.Add($"Kurser: {string.Join(", ", Courses.Select(o => o.ToStringShort()))}");
         return cells;
     }
 
     public override string ToString()
     {
-        return base.ToString() + $" Kunskapsområden: {string.Join(", ", KnowledgeList)} Kurser: {string.Join(", ", Courses)}";
+        return base.ToString() + $" Kunskapsområden: {string.Join(", ", KnowledgeList)} Kurser: {string.Join(", ", Courses.Select(o => o.ToStringShort()))}";
     }
 }

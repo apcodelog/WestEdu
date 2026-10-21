@@ -45,6 +45,6 @@ public class Course : IDataObject
 
     public string ToStringShort()
     {
-        return $"{CourseNumber} - {Title}";
+        return $"{CourseNumber}-{Title}";
     }
 }

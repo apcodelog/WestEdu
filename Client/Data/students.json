@@ -1,6 +1,17 @@
 [
   {
     "ssn": "19800101-1234",
+    "courses": [
+      {
+        "id": "175fddec-b92c-4b06-935c-912a36ddd7eb",
+        "courseNumber": "504",
+        "title": "Java Avancerad",
+        "courseType": 1,
+        "days": 80,
+        "startDate": "2000-01-10",
+        "endDate": "2000-06-10"
+      }
+    ],
     "id": "412f7b8d-2d26-4417-a142-eb82906eb2f7",
     "firstName": "Glenn",
     "lastName": "Hysen",
@@ -15,6 +26,17 @@
   },
   {
     "ssn": "19870102-9876",
+    "courses": [
+      {
+        "id": "23138739-a668-44e1-962e-697dfb29f4d9",
+        "courseNumber": "505",
+        "title": ".NET Debug and Test",
+        "courseType": 2,
+        "days": 45,
+        "startDate": "2000-04-01",
+        "endDate": "2000-06-15"
+      }
+    ],
     "id": "f0d2995d-667f-4cb7-ad88-d1d2dc12fa12",
     "firstName": "Henrik",
     "lastName": "Lundqvist",
@@ -29,6 +51,26 @@
   },
   {
     "ssn": "19950415-7531",
+    "courses": [
+      {
+        "id": "175fddec-b92c-4b06-935c-912a36ddd7eb",
+        "courseNumber": "504",
+        "title": "Java Avancerad",
+        "courseType": 1,
+        "days": 80,
+        "startDate": "2000-01-10",
+        "endDate": "2000-06-10"
+      },
+      {
+        "id": "23138739-a668-44e1-962e-697dfb29f4d9",
+        "courseNumber": "505",
+        "title": ".NET Debug and Test",
+        "courseType": 2,
+        "days": 45,
+        "startDate": "2000-04-01",
+        "endDate": "2000-06-15"
+      }
+    ],
     "id": "ece9a9c8-e26d-4638-a54d-4ef86583390a",
     "firstName": "Mondo",
     "lastName": "Duplantis",

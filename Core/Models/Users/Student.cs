@@ -27,12 +27,12 @@ public class Student : UserBase
     {
         var cells = base.GetInfoCells();
         cells.Add($"Personnr.: {SSN}");
-        cells.Add($"Kurser: {string.Join(", ", Courses)}");
+        cells.Add($"Kurser: {string.Join(", ", Courses.Select(o => o.ToStringShort()))}");
         return cells;
     }
 
     public override string ToString()
     {
-        return base.ToString() + $" Personnr.: {SSN} Kurser: {string.Join(", ", Courses)}";
+        return base.ToString() + $" Personnr.: {SSN} Kurser: {string.Join(", ", Courses.Select(o => o.ToStringShort()))}";
     }
 }
