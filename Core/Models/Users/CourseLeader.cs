@@ -4,31 +4,25 @@ using Core.Models.Managers;
 
 namespace Core.Models.Users;
 
-public class CourseLeader : SchoolAdmin
+public class CourseLeader : Student
 {
-    public List<Course> Courses { get; set; } = [];
+    public DateOnly HiringDate { get; set; }
 
     public override void SetUserInfo()
     {
         base.SetUserInfo();
-
-        var courses = new Storage<Course>().Read(new DataObjectManager<Course>().GetDataGroup().Path);
-        Courses = ConsoleInputHelper.GetMultiSelect(
-            "Lägg till kurser", 
-            courses,
-            courses.Select(o => o.ToStringShort()).ToList()
-            );
+        HiringDate = ConsoleInputHelper.GetDate("Skriv anställningsdatum");
     }
 
     public override List<string> GetInfoCells()
     {
         var cells = base.GetInfoCells();
-        cells.Add($"Kurser: {string.Join(", ", Courses)}");
+        cells.Add($"Anställningsdatum: {HiringDate}");
         return cells;
     }
 
     public override string ToString()
     {
-        return base.ToString() + $" Kurser: {string.Join(", ", Courses)}";
+        return base.ToString() + $" Anställningsdatum: {HiringDate}";
     }
 }
